@@ -34,4 +34,12 @@ public class CurriculumVitae {
         this.name = name;
     }
 
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
 }

@@ -11,21 +11,21 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 public class CurriculumController {
 
-    private final CurriculumRepository userRepository;
+    private final CurriculumRepository cvRepository;
 
     @Autowired
-    public CurriculumController(CurriculumRepository userRepository) {
-        this.userRepository = userRepository;
+    public CurriculumController(CurriculumRepository cvRepository) {
+        this.cvRepository = cvRepository;
     }
 
     @GetMapping("/cvs")
-    public List<CurriculumVitae> getUsers() {
-        return userRepository.findAll();
+    public List<CurriculumVitae> getCvs() {
+        return cvRepository.findAll();
     }
 
     @PostMapping("/cvs")
-    void addUser(@RequestBody CurriculumVitae cv) {
-        userRepository.save(cv);
+    void addCv(@RequestBody CurriculumVitae cv) {
+        cvRepository.save(cv);
     }
 
 }
