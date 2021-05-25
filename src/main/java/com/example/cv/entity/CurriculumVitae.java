@@ -1,9 +1,6 @@
 package com.example.cv.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class CurriculumVitae {
@@ -13,6 +10,10 @@ public class CurriculumVitae {
     private long id;
 
     private String name;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id", referencedColumnName = "id")
+    private Person person;
 
     public CurriculumVitae() {
     }
