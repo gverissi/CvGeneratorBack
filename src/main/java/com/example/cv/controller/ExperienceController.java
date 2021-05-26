@@ -1,36 +1,38 @@
 package com.example.cv.controller;
 
 import com.example.cv.entity.CurriculumVitae;
-import com.example.cv.entity.Person;
+import com.example.cv.entity.Experience;
 import com.example.cv.repository.CurriculumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/cvs/{cvId}")
-public class PersonController {
+public class ExperienceController {
 
     private final CurriculumRepository cvRepository;
 
     @Autowired
-    public PersonController(CurriculumRepository cvRepository) {
+    public ExperienceController(CurriculumRepository cvRepository) {
         this.cvRepository = cvRepository;
     }
 
-    @GetMapping("/person")
-    public Person getPerson(@PathVariable long cvId) {
+    @GetMapping("/experiences")
+    public List<Experience> getAllExperiences(@PathVariable long cvId) {
         CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        Person person = null;
-        if (cv != null) person = cv.getPerson();
-        return person;
+        List<Experience> experiences = null;
+        if (cv != null) experiences = cv.getExperiences();
+        return experiences;
     }
 
-    @PostMapping("/person")
-    void addPerson(@PathVariable long cvId, @RequestBody Person person) {
+    @PostMapping("/experiences")
+    void addPerson(@PathVariable long cvId, @RequestBody Experience experience) {
         CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
         if (cv != null) {
-            cv.setPerson(person);
+            cv.getExperiences().add(experience);
             cvRepository.save(cv);
         }
     }

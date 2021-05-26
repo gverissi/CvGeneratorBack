@@ -1,6 +1,8 @@
 package com.example.cv.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class CurriculumVitae {
@@ -14,6 +16,10 @@ public class CurriculumVitae {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cv_id")
+    private List<Experience> experiences = new ArrayList<>();
 
     public CurriculumVitae() {
     }
@@ -40,6 +46,14 @@ public class CurriculumVitae {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public List<Experience> getExperiences() {
+        return experiences;
+    }
+
+    public void setExperiences(List<Experience> experiences) {
+        this.experiences = experiences;
     }
 
 }
