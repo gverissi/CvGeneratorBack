@@ -29,7 +29,7 @@ public class ExperienceController {
     }
 
     @PostMapping("/experiences")
-    void addPerson(@PathVariable long cvId, @RequestBody Experience experience) {
+    void addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
         CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
         if (cv != null) {
             cv.getExperiences().add(experience);
