@@ -1,5 +1,6 @@
 package com.example.cv.service;
 
+import com.example.cv.entity.CurriculumVitae;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -16,33 +17,25 @@ import java.io.OutputStream;
 @Service
 public class PdfService {
 
-    private static final String PDF_RESOURCES = "";
-//    private StudentService studentService;
-    private SpringTemplateEngine templateEngine;
-
-//    @Autowired
-//    public PdfService(StudentService studentService, SpringTemplateEngine templateEngine) {
-//        this.studentService = studentService;
-//        this.templateEngine = templateEngine;
-//    }
+    private final SpringTemplateEngine templateEngine;
 
     @Autowired
     public PdfService(SpringTemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
     }
 
-    public File generatePdf() throws IOException, DocumentException {
-        Context context = getContext();
+    public File generatePdf(CurriculumVitae cv) throws IOException, DocumentException {
+        Context context = getContext(cv);
         String html = loadAndFillTemplate(context);
         return renderPdf(html);
     }
 
 
     private File renderPdf(String html) throws IOException, DocumentException {
-        File file = File.createTempFile("students", ".pdf");
+        File file = File.createTempFile("cvvvv", ".pdf");
         OutputStream outputStream = new FileOutputStream(file);
         ITextRenderer renderer = new ITextRenderer(20f * 4f / 3f, 20);
-        renderer.setDocumentFromString(html, new ClassPathResource(PDF_RESOURCES).getURL().toExternalForm());
+        renderer.setDocumentFromString(html, new ClassPathResource("").getURL().toExternalForm());
         renderer.layout();
         renderer.createPDF(outputStream);
         outputStream.close();
@@ -50,9 +43,9 @@ public class PdfService {
         return file;
     }
 
-    private Context getContext() {
+    private Context getContext(CurriculumVitae cv) {
         Context context = new Context();
-//        context.setVariable("students", studentService.getStudents());
+        context.setVariable("cv", cv);
         return context;
     }
 

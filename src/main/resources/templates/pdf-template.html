@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Title</title>
 </head>
 <body>
-<h1>Mon Titre</h1>
+<h1>Mon titre</h1>
+<h3 class="text-right" th:text="${cv.name}"></h3>
 <h2>Sous titre</h2>
 <p>Salut toi</p>
+
+<div th:each="experience : ${cv.experiences}">
+    <div th:text="${experience.title}"></div>
+    <div th:text="${experience.society}"></div>
+    <div th:text="${experience.location}"></div>
+</div>
+
+
+
 </body>
 </html>
