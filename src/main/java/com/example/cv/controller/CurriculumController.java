@@ -23,9 +23,22 @@ public class CurriculumController {
         return cvRepository.findAll();
     }
 
+    @GetMapping("/cvs/{cvId}")
+    public CurriculumVitae getCv(@PathVariable long cvId) {
+        return cvRepository.findById(cvId).orElse(null);
+    }
+
     @PostMapping("/cvs")
-    void addCv(@RequestBody CurriculumVitae cv) {
+    public CurriculumVitae addCv(@RequestBody CurriculumVitae cv) {
         cvRepository.save(cv);
+        return cv;
+    }
+
+    @PutMapping("/cvs/{cvId}")
+    public void updateCv(@PathVariable long cvId, @RequestBody CurriculumVitae cv) {
+        if (cvId != 0) {
+            cvRepository.save(cv);
+        }
     }
 
 }
