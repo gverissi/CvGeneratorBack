@@ -3,23 +3,74 @@
 
 <head>
     <title>Curriculum Vitae</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="/css/styles.css"/>
 </head>
 
 <body>
 
-<h1>Mon titre</h1>
-<h3 class="text-right" th:text="${cv.name}"></h3>
-<h2>Sous titre</h2>
-<p>Salut toi</p>
+<!--page-size=793px-->
 
-<div th:each="experience : ${cv.experiences}">
-    <div th:text="${experience.title}"></div>
-    <div th:text="${experience.society}"></div>
-    <div th:text="${experience.location}"></div>
+<div><!-- data column -->
+    <div class="div1">column 1</div><div class="div2">column 2</div>
 </div>
 
 
+<div>
+
+    <div class="border-bottom">
+        <div class="inline left">
+            4fhfhg hdhdh hdhd
+        </div><div class="inline right">
+            <h1 th:text="${cv.person.firstName.toUpperCase()}"></h1>
+            <h1 th:text="${cv.person.lastName.toUpperCase()}"></h1>
+            <h2 th:text="${cv.person.job.toUpperCase()}"></h2>
+        </div>
+    </div>
+
+    <div>
+        <div class="inline left">
+            4dfhdh fhdfh dh h
+        </div><div class="inline right-border">
+            <h3>PROFILE</h3>
+            <p th:text="${cv.person.profile}"></p>
+            <h3>EXPERIENCES</h3>
+            <div class="mb-3" th:each="experience : ${cv.experiences}">
+                <strong th:text="${experience.title}"></strong>
+                <p th:text="${experience.society}"></p>
+                <p th:text="${experience.location}"></p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--<div class="container bg-danger">-->
+<!--    <div class="row border-bottom">-->
+<!--        <div class="col">4fhfhg hdhdh hdhd</div>-->
+<!--        <div class="col">-->
+<!--            <h1 th:text="${cv.person.firstName.toUpperCase()}"></h1>-->
+<!--            <h1 th:text="${cv.person.lastName.toUpperCase()}"></h1>-->
+<!--            <h2 th:text="${cv.person.job.toUpperCase()}"></h2>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="row bg-primary">-->
+<!--        <div class="col-4">4dfhdh fhdfh dh h</div>-->
+<!--        <div class="col-8 border-start">-->
+<!--            <h3>PROFILE</h3>-->
+<!--            <p th:text="${cv.person.profile}"></p>-->
+<!--            <h3>EXPERIENCES</h3>-->
+<!--            <div class="mb-3" th:each="experience : ${cv.experiences}">-->
+<!--                <strong th:text="${experience.title}"></strong>-->
+<!--                <p th:text="${experience.society}"></p>-->
+<!--                <p th:text="${experience.location}"></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 </body>
 </html>

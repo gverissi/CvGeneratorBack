@@ -1,0 +1,56 @@
+
+body {
+    margin: 50px;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+
+.inline {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.left {
+    width: 260px;
+    background-color: red;
+}
+
+.right {
+    width: 433px;
+    background-color: green;
+}
+
+.right-border {
+    width: 423px;
+    background-color: green;
+    border-left: blue solid 10px;
+}
+
+.border-bottom {
+    border-bottom: blue solid 10px;
+}
+
+.div1 {
+    display: inline-block;
+    width: 100px;
+    background-color: red;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+
+.div2 {
+    display: inline-block;
+    width: 593px;
+    background-color: green;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}

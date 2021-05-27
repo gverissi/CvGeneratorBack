@@ -34,8 +34,8 @@ public class PdfService {
     private File renderPdf(String html, String cvName) throws IOException, DocumentException {
         File file = File.createTempFile(cvName, ".pdf");
         OutputStream outputStream = new FileOutputStream(file);
-        ITextRenderer renderer = new ITextRenderer(20f * 4f / 3f, 20);
-        renderer.setDocumentFromString(html, new ClassPathResource("").getURL().toExternalForm());
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(html, new ClassPathResource("/static/").getURL().toExternalForm());
         renderer.layout();
         renderer.createPDF(outputStream);
         outputStream.close();
