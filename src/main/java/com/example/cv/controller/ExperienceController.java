@@ -2,7 +2,7 @@ package com.example.cv.controller;
 
 import com.example.cv.entity.CurriculumVitae;
 import com.example.cv.entity.Experience;
-import com.example.cv.repository.CurriculumRepository;
+import com.example.cv.service.CvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,40 +14,31 @@ import java.util.List;
 @RequestMapping("/cvs/{cvId}")
 public class ExperienceController {
 
-    private final CurriculumRepository cvRepository;
+    private final CvService cvService;
 
     @Autowired
-    public ExperienceController(CurriculumRepository cvRepository) {
-        this.cvRepository = cvRepository;
+    public ExperienceController(CvService cvService) {
+        this.cvService = cvService;
     }
 
     @GetMapping("/experiences")
     public List<Experience> getAllExperiences(@PathVariable long cvId) {
-        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        List<Experience> experiences = null;
-        if (cv != null) experiences = cv.getExperiences();
-        return experiences;
+        return cvService.findById(cvId).getExperiences();
     }
 
     @PostMapping("/experiences")
     Experience addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
-        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        Experience savedExp = null;
-        if (cv != null) {
-            cv.addExperience(experience);
-            cvRepository.save(cv);
-            savedExp = cv.getExperiences().get(cv.getExperiences().size() - 1);
-        }
-        return savedExp;
+        CurriculumVitae cv = cvService.findById(cvId);
+        cv.addExperience(experience);
+        cvService.save(cv);
+        return cv.getExperiences().get(cv.getExperiences().size() - 1);
     }
 
     @PutMapping("/experiences/{expId}")
     void updateExperience(@PathVariable long cvId, @PathVariable long expId, @RequestBody Experience experience) {
-        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        if (cv != null) {
-            Experience localExp = cv.getExperiences().stream().filter(exp -> exp.getId() == expId).findFirst().orElse(null);
-            if (Collections.replaceAll(cv.getExperiences(), localExp, experience)) cvRepository.save(cv);
-        }
+        CurriculumVitae cv = cvService.findById(cvId);
+        Experience localExp = cv.getExperiences().stream().filter(exp -> exp.getId() == expId).findFirst().orElse(null);
+        if (Collections.replaceAll(cv.getExperiences(), localExp, experience)) cvService.save(cv);
     }
 
 }

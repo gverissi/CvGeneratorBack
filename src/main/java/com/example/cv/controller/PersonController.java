@@ -2,7 +2,7 @@ package com.example.cv.controller;
 
 import com.example.cv.entity.CurriculumVitae;
 import com.example.cv.entity.Person;
-import com.example.cv.repository.CurriculumRepository;
+import com.example.cv.service.CvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,28 +11,23 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cvs/{cvId}")
 public class PersonController {
 
-    private final CurriculumRepository cvRepository;
+    private final CvService cvService;
 
     @Autowired
-    public PersonController(CurriculumRepository cvRepository) {
-        this.cvRepository = cvRepository;
+    public PersonController(CvService cvService) {
+        this.cvService = cvService;
     }
 
     @GetMapping("/person")
     public Person getPerson(@PathVariable long cvId) {
-        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        Person person = null;
-        if (cv != null) person = cv.getPerson();
-        return person;
+        return cvService.findById(cvId).getPerson();
     }
 
     @PostMapping("/person")
     Person addPerson(@PathVariable long cvId, @RequestBody Person person) {
-        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
-        if (cv != null) {
-            cv.setPerson(person);
-            cvRepository.save(cv);
-        }
+        CurriculumVitae cv = cvService.findById(cvId);
+        cv.setPerson(person);
+        cvService.save(cv);
         return person;
     }
 
