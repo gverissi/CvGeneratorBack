@@ -19,17 +19,17 @@ public class CvDaoHibernate implements CvDaoInterface {
 
     @Override
     public CurriculumVitae save(CurriculumVitae cv) {
-        return this.cvRepository.save(cv);
+        return cvRepository.save(cv);
     }
 
     @Override
     public List<CurriculumVitae> findAll() {
-        return this.cvRepository.findAll();
+        return cvRepository.findAll();
     }
 
     @Override
     public CurriculumVitae findById(long id) {
-        return this.cvRepository.findById(id).orElse(null);
+        return cvRepository.findById(id).orElse(null);
     }
 
 }
