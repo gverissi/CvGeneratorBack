@@ -6,6 +6,7 @@ import com.example.cv.repository.CurriculumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -29,11 +30,23 @@ public class ExperienceController {
     }
 
     @PostMapping("/experiences")
-    void addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
+    Experience addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
+        CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
+        Experience savedExp = null;
+        if (cv != null) {
+            cv.addExperience(experience);
+            cvRepository.save(cv);
+            savedExp = cv.getExperiences().get(cv.getExperiences().size() - 1);
+        }
+        return savedExp;
+    }
+
+    @PutMapping("/experiences/{expId}")
+    void updateExperience(@PathVariable long cvId, @PathVariable long expId, @RequestBody Experience experience) {
         CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
         if (cv != null) {
-            cv.getExperiences().add(experience);
-            cvRepository.save(cv);
+            Experience localExp = cv.getExperiences().stream().filter(exp -> exp.getId() == expId).findFirst().orElse(null);
+            if (Collections.replaceAll(cv.getExperiences(), localExp, experience)) cvRepository.save(cv);
         }
     }
 

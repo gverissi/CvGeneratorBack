@@ -27,12 +27,13 @@ public class PersonController {
     }
 
     @PostMapping("/person")
-    void addPerson(@PathVariable long cvId, @RequestBody Person person) {
+    Person addPerson(@PathVariable long cvId, @RequestBody Person person) {
         CurriculumVitae cv = cvRepository.findById(cvId).orElse(null);
         if (cv != null) {
             cv.setPerson(person);
             cvRepository.save(cv);
         }
+        return person;
     }
 
 }

@@ -24,6 +24,10 @@ public class CurriculumVitae {
     public CurriculumVitae() {
     }
 
+    public void addExperience(Experience experience) {
+        experiences.add(experience);
+    }
+
     public long getId() {
         return id;
     }
