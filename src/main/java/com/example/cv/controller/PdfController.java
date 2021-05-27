@@ -6,6 +6,7 @@ import com.example.cv.service.PdfService;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,7 +33,7 @@ public class PdfController {
     }
 
     @GetMapping("/download-pdf")
-    public void downloadPDFResource(@PathVariable long cvId, HttpServletResponse response) {
+    public void downloadCvAsPdf(@PathVariable long cvId, HttpServletResponse response) {
         CurriculumVitae cv = cvService.findById(cvId);
         try {
             Path file = Paths.get(pdfService.generatePdf(cv).getAbsolutePath());
@@ -45,6 +46,13 @@ public class PdfController {
         } catch (DocumentException | IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @GetMapping("/show-html")
+    public String showCvAsHtml(@PathVariable long cvId, Model model) {
+        CurriculumVitae cv = cvService.findById(cvId);
+        model.addAttribute("cv", cv);
+        return "pdf-template";
     }
 
 }

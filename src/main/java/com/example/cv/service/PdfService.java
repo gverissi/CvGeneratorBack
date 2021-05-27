@@ -27,12 +27,12 @@ public class PdfService {
     public File generatePdf(CurriculumVitae cv) throws IOException, DocumentException {
         Context context = getContext(cv);
         String html = loadAndFillTemplate(context);
-        return renderPdf(html);
+        return renderPdf(html, cv.getName());
     }
 
 
-    private File renderPdf(String html) throws IOException, DocumentException {
-        File file = File.createTempFile("cvvvv", ".pdf");
+    private File renderPdf(String html, String cvName) throws IOException, DocumentException {
+        File file = File.createTempFile(cvName, ".pdf");
         OutputStream outputStream = new FileOutputStream(file);
         ITextRenderer renderer = new ITextRenderer(20f * 4f / 3f, 20);
         renderer.setDocumentFromString(html, new ClassPathResource("").getURL().toExternalForm());
