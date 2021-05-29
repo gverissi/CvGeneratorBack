@@ -24,7 +24,7 @@ public class PersonController {
     }
 
     @PostMapping("/person")
-    Person addPerson(@PathVariable long cvId, @RequestBody Person person) {
+    public Person addPerson(@PathVariable long cvId, @RequestBody Person person) {
         CurriculumVitae cv = cvService.findById(cvId);
         cv.setPerson(person);
         cvService.save(cv);

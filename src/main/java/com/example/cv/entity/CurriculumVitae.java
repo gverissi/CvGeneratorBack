@@ -14,6 +14,10 @@ public class CurriculumVitae {
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
+    private Image image;
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
@@ -42,6 +46,14 @@ public class CurriculumVitae {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public Person getPerson() {

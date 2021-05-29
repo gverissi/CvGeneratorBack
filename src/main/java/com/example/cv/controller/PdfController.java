@@ -4,6 +4,7 @@ import com.example.cv.entity.CurriculumVitae;
 import com.example.cv.service.CvService;
 import com.example.cv.service.PdfService;
 import com.lowagie.text.DocumentException;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,6 +55,9 @@ public class PdfController {
     public String showCvAsHtml(@PathVariable long cvId, Model model) {
         CurriculumVitae cv = cvService.findById(cvId);
         model.addAttribute("cv", cv);
+        byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
+        String image = new String(encodeBase64, StandardCharsets.UTF_8);
+        model.addAttribute("image", image);
         return "pdf-template";
     }
 

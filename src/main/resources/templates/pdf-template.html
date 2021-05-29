@@ -20,9 +20,9 @@
 <div>
 
     <div class="border-bottom">
-        <div class="inline left">
-            4fhfhg hdhdh hdhd
-        </div><div class="inline right">
+        <div class="inline-middle-fs-0 left ">
+            <img class="image-style" th:src="|data:image/png;base64,${image}|" alt="image"/>
+        </div><div class="inline-middle right-border">
             <h1 th:text="${cv.person.firstName.toUpperCase()}"></h1>
             <h1 th:text="${cv.person.lastName.toUpperCase()}"></h1>
             <h2 th:text="${cv.person.job.toUpperCase()}"></h2>

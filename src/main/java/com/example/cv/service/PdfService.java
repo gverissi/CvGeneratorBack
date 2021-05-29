@@ -2,6 +2,7 @@ package com.example.cv.service;
 
 import com.example.cv.entity.CurriculumVitae;
 import com.lowagie.text.DocumentException;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class PdfService {
@@ -46,6 +48,9 @@ public class PdfService {
     private Context getContext(CurriculumVitae cv) {
         Context context = new Context();
         context.setVariable("cv", cv);
+        byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
+        String image = new String(encodeBase64, StandardCharsets.UTF_8);
+        context.setVariable("image", image);
         return context;
     }
 
