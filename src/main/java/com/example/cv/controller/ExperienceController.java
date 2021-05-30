@@ -27,7 +27,7 @@ public class ExperienceController {
     }
 
     @PostMapping("/experiences")
-    Experience addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
+    public Experience addExperience(@PathVariable long cvId, @RequestBody Experience experience) {
         CurriculumVitae cv = cvService.findById(cvId);
         cv.addExperience(experience);
         cvService.save(cv);
@@ -35,7 +35,7 @@ public class ExperienceController {
     }
 
     @PutMapping("/experiences/{expId}")
-    void updateExperience(@PathVariable long cvId, @PathVariable long expId, @RequestBody Experience experience) {
+    public void updateExperience(@PathVariable long cvId, @PathVariable long expId, @RequestBody Experience experience) {
         CurriculumVitae cv = cvService.findById(cvId);
         Experience localExp = cv.getExperiences().stream().filter(exp -> exp.getId() == expId).findFirst().orElse(null);
         if (Collections.replaceAll(cv.getExperiences(), localExp, experience)) cvService.save(cv);

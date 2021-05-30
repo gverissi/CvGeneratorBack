@@ -1,10 +1,8 @@
 package com.example.cv;
 
-import com.example.cv.entity.CurriculumVitae;
-import com.example.cv.entity.Experience;
-import com.example.cv.entity.Image;
-import com.example.cv.entity.Person;
+import com.example.cv.entity.*;
 import com.example.cv.repository.CurriculumRepository;
+import com.example.cv.repository.SkillRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,7 +12,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 
 @SpringBootApplication
 public class CvGeneratorApplication {
@@ -24,7 +21,7 @@ public class CvGeneratorApplication {
     }
 
     @Bean
-    CommandLineRunner init(CurriculumRepository cvRepository) {
+    CommandLineRunner init(CurriculumRepository cvRepository, SkillRepository skillRepository) {
         return args -> {
             CurriculumVitae cv = new CurriculumVitae();
             cv.setName("CV_dev");
@@ -56,6 +53,10 @@ public class CvGeneratorApplication {
             experience.setSociety("Start-Up Iole Solutions");
             experience.setLocation("Vannes (56)");
             cv.addExperience(experience);
+
+            skillRepository.findAllByTypeOrderByName(SkillType.LANGUAGE.label).forEach(cv::addSkill);
+            skillRepository.findAllByTypeOrderByName(SkillType.FRAMEWORK.label).forEach(cv::addSkill);
+            skillRepository.findAllByTypeOrderByName(SkillType.DATABASE.label).forEach(cv::addSkill);
 
             cvRepository.save(cv);
         };

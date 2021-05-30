@@ -3,9 +3,6 @@ package com.example.cv.controller;
 import com.example.cv.entity.CurriculumVitae;
 import com.example.cv.entity.Image;
 import com.example.cv.service.CvService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -27,8 +24,12 @@ public class ImageController {
 
     @GetMapping(value = "/image", produces = MediaType.TEXT_PLAIN_VALUE)
     public String getImage(@PathVariable long cvId) {
-        System.out.println(cvService.findById(cvId).getImage().getName());
-        return cvService.findById(cvId).getImage().getName();
+        Image image = cvService.findById(cvId).getImage();
+        if (image != null) {
+            return image.getName();
+        } else {
+            return "Aucune image selectionné.";
+        }
     }
 
     @PostMapping("/image")
