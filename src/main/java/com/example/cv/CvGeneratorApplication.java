@@ -55,11 +55,21 @@ public class CvGeneratorApplication {
                     "- Travail en équipe");
             cv.addExperience(experience);
 
-            experience = new Experience();
-            experience.setTitle("Stage en entreprise");
-            experience.setSociety("Start-Up Iole Solutions");
-            experience.setLocation("Vannes (56)");
-            cv.addExperience(experience);
+            Project project = new Project();
+            project.setTitle("Site de chat en ligne");
+            project.setYear(2021);
+            project.setDescription("App. web : Angular, Firebase, Git, GitHub");
+            project.setGitHub("https://github.com/gverissi/MyChatRoom");
+            project.setSite("https://greg-chat-room.netlify.app/home");
+            cv.addProject(project);
+
+            project = new Project();
+            project.setTitle("Site de poker en ligne");
+            project.setYear(2020);
+            project.setDescription("App. web : POO JavaScript, Web service PHP, Jasmine");
+            project.setGitHub("https://github.com/gverissi/This-Is-Not-Poker");
+            project.setSite("https://this-is-not-poker-greg.netlify.app/");
+            cv.addProject(project);
 
             skillRepository.findAllByTypeOrderByName(SkillType.LANGUAGE.label).forEach(cv::addSkill);
             skillRepository.findAllByTypeOrderByName(SkillType.FRAMEWORK.label).forEach(cv::addSkill);

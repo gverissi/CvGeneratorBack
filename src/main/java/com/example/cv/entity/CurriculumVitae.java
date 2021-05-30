@@ -1,6 +1,5 @@
 package com.example.cv.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -33,6 +32,10 @@ public class CurriculumVitae {
     @JoinColumn(name = "cv_id")
     private List<Experience> experiences = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cv_id")
+    private List<Project> projects = new ArrayList<>();
+
     @JsonManagedReference
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
@@ -44,6 +47,10 @@ public class CurriculumVitae {
 
     public void addExperience(Experience experience) {
         experiences.add(experience);
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
     }
 
     public void addSkill(Skill skill) {
@@ -97,6 +104,14 @@ public class CurriculumVitae {
 
     public void setExperiences(List<Experience> experiences) {
         this.experiences = experiences;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     public List<Skill> getSkills() {

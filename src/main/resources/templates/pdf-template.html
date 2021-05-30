@@ -45,6 +45,7 @@
         </div><div class="inline right-border mt-5px">
             <h3>PROFILE</h3>
             <p th:text="${cv.person.profile}"></p>
+
             <h3 th:if="${cv.experiences.size() > 1}" class="mt-20px">EXPÉRIENCES</h3>
             <h3 th:if="${cv.experiences.size() == 1}" class="mt-20px">EXPÉRIENCE</h3>
             <div class="mt-10px" th:each="experience : ${cv.experiences}">
@@ -52,6 +53,16 @@
                 <p><span th:text="${experience.title}"></span> | <span th:text="${experience.duration}"></span><span> mois</span></p>
                 <p class="new-line" th:text="${experience.description}"></p>
             </div>
+
+            <h3 th:if="${cv.projects.size() > 1}" class="mt-20px">PROJETS</h3>
+            <h3 th:if="${cv.projects.size() == 1}" class="mt-20px">PROJET</h3>
+            <div class="mt-10px" th:each="project : ${cv.projects}">
+                <strong th:text="${project.title}"></strong><strong> | </strong><strong th:text="${project.year}"></strong>
+                <p class="new-line" th:text="${project.description}"></p>
+                <p><a class="text-right" th:href="${project.site}" th:text="${project.site}"></a></p>
+                <p><a class="text-right" th:href="${project.gitHub}" th:text="${project.gitHub}"></a></p>
+            </div>
+
         </div>
     </div>
 
