@@ -41,4 +41,12 @@ public class ExperienceController {
         if (Collections.replaceAll(cv.getExperiences(), localExp, experience)) cvService.save(cv);
     }
 
+    @DeleteMapping("/experiences/{expId}")
+    public void removeExperience(@PathVariable long cvId, @PathVariable long expId) {
+        CurriculumVitae cv = cvService.findById(cvId);
+        Experience experience = cv.getExperiences().stream().filter(exp -> exp.getId() == expId).findFirst().orElse(null);
+        cv.getExperiences().remove(experience);
+        cvService.save(cv);
+    }
+
 }
