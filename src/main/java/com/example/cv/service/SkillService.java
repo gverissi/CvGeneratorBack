@@ -24,4 +24,5 @@ public class SkillService {
     public Skill findById(long skillId) {
         return skillDao.findById(skillId);
     }
+
 }
