@@ -48,7 +48,7 @@ public class CvGeneratorApplication {
             experience.setSociety("Start-Up Iole Solutions");
             experience.setLocation("Vannes");
             experience.setYear(2020);
-            experience.setDuration(11);
+            experience.setDuration(2);
             experience.setDescription(
                     "- Développement d'un module d'agrégation bancaire\n" +
                     "- App. web : php, html, css, js, PostgreSql, Git, Gitea\n" +
