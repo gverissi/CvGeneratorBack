@@ -45,11 +45,12 @@
         </div><div class="inline right-border mt-5px">
             <h3>PROFILE</h3>
             <p th:text="${cv.person.profile}"></p>
-            <h3 class="mt-20px">EXPÉRIENCES</h3>
+            <h3 th:if="${cv.experiences.size() > 1}" class="mt-20px">EXPÉRIENCES</h3>
+            <h3 th:if="${cv.experiences.size() == 1}" class="mt-20px">EXPÉRIENCE</h3>
             <div class="mt-10px" th:each="experience : ${cv.experiences}">
-                <strong th:text="${experience.title}"></strong>
-                <p th:text="${experience.society}"></p>
-                <p th:text="${experience.location}"></p>
+                <strong th:text="${experience.society}"></strong><strong> - </strong><strong th:text="${experience.location}"></strong><strong> | </strong><strong th:text="${experience.year}"></strong>
+                <p><span th:text="${experience.title}"></span> | <span th:text="${experience.duration}"></span></p>
+                <p th:text="${experience.description}"></p>
             </div>
         </div>
     </div>

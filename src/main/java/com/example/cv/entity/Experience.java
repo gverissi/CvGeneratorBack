@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
 
 @Entity
 public class Experience {
@@ -16,8 +15,9 @@ public class Experience {
     private String title;
     private String society;
     private String location;
-    private Date startingDate;
-    private Date endingDate;
+    private int year;
+    private int duration;
+    private String description;
 
     public Experience() {
     }
@@ -54,20 +54,28 @@ public class Experience {
         this.location = location;
     }
 
-    public Date getStartingDate() {
-        return startingDate;
+    public int getYear() {
+        return year;
     }
 
-    public void setStartingDate(Date startingDate) {
-        this.startingDate = startingDate;
+    public void setYear(int startingDate) {
+        this.year = startingDate;
     }
 
-    public Date getEndingDate() {
-        return endingDate;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setEndingDate(Date endingDate) {
-        this.endingDate = endingDate;
+    public void setDuration(int endingDate) {
+        this.duration = endingDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

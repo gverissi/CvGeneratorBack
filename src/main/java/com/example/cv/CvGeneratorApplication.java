@@ -46,7 +46,13 @@ public class CvGeneratorApplication {
             Experience experience = new Experience();
             experience.setTitle("Stage en entreprise");
             experience.setSociety("Start-Up Iole Solutions");
-            experience.setLocation("Vannes (56)");
+            experience.setLocation("Vannes");
+            experience.setYear(2020);
+            experience.setDuration(11);
+            experience.setDescription(
+                    "- Développement d'un module d'agrégation bancaire\n" +
+                    "- App. web : php, html, css, js, PostgreSql, Git, Gitea\n" +
+                    "- Travail en équipe");
             cv.addExperience(experience);
 
             experience = new Experience();
