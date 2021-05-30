@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class CvGeneratorApplication {
@@ -57,6 +58,15 @@ public class CvGeneratorApplication {
             skillRepository.findAllByTypeOrderByName(SkillType.LANGUAGE.label).forEach(cv::addSkill);
             skillRepository.findAllByTypeOrderByName(SkillType.FRAMEWORK.label).forEach(cv::addSkill);
             skillRepository.findAllByTypeOrderByName(SkillType.DATABASE.label).forEach(cv::addSkill);
+
+            Information information = new Information();
+            information.setBirthDate(LocalDate.of(1982, 9, 20));
+            information.setMobility("Bretagne");
+            information.setPhone("06 28 33 81 29");
+            information.setEmail("greg.verissimo@gmail.com");
+            information.setLinkedIn("www.linkedin.com/in/gverissi");
+            information.setGitHub("https://github.com/gverissi");
+            cv.setInformation(information);
 
             cvRepository.save(cv);
         };

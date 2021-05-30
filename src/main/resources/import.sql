@@ -1,11 +1,11 @@
 INSERT INTO skill (type, name) VALUES ('Language', 'Java SE');
 INSERT INTO skill (type, name) VALUES ('Language', 'Java EE');
 INSERT INTO skill (type, name) VALUES ('Language', 'Java FX');
-INSERT INTO skill (type, name) VALUES ('Language', 'Java PHP');
-INSERT INTO skill (type, name) VALUES ('Language', 'Java HTML');
-INSERT INTO skill (type, name) VALUES ('Language', 'Java CSS');
-INSERT INTO skill (type, name) VALUES ('Language', 'Java JS');
-INSERT INTO skill (type, name) VALUES ('Language', 'Java TS');
+INSERT INTO skill (type, name) VALUES ('Language', 'PHP');
+INSERT INTO skill (type, name) VALUES ('Language', 'HTML');
+INSERT INTO skill (type, name) VALUES ('Language', 'CSS');
+INSERT INTO skill (type, name) VALUES ('Language', 'Java Script');
+INSERT INTO skill (type, name) VALUES ('Language', 'Type Script');
 INSERT INTO skill (type, name) VALUES ('Framework', 'Spring Boot');
 INSERT INTO skill (type, name) VALUES ('Framework', 'Angular');
 INSERT INTO skill (type, name) VALUES ('Database', 'PostgreSQL');

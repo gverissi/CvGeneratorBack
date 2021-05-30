@@ -1,6 +1,7 @@
 
 body {
     margin: 50px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 @page {
@@ -31,18 +32,57 @@ h1, h2, h3, p {
 .left {
     width: 230px;
     background-color: red;
-    padding: 20px;
+    padding: 15px;
+}
+
+.right {
+    width: 383px;
+    background-color: green;
+    padding: 15px 15px 15px 20px;
 }
 
 .right-border {
     width: 383px;
     background-color: green;
-    border-left: blue solid 10px;
+    border-left: #555 solid 5px;
     padding: 15px;
 }
 
 .border-bottom {
-    border-bottom: blue solid 10px;
+    border-bottom: #555 solid 5px;
+}
+
+.image-style {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.mt-5px {
+    margin-top: 5px;
+}
+
+.mt-10px {
+    margin-top: 10px;
+}
+
+.mt-20px {
+    margin-top: 20px;
+}
+
+.mb-10px {
+    margin-bottom: 10px;
+}
+
+a {
+    color: black;
 }
 
 .div1 {
@@ -61,13 +101,4 @@ h1, h2, h3, p {
     margin: 0;
     padding: 0;
     border-width: 0;
-}
-
-.image-style {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }

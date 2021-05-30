@@ -19,6 +19,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:4200")
@@ -57,6 +59,9 @@ public class PdfController {
         byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
         String image = new String(encodeBase64, StandardCharsets.UTF_8);
         model.addAttribute("image", image);
+        int age = Period.between(cv.getInformation().getBirthDate(), LocalDate.now()).getYears();
+        model.addAttribute("age", age);
+        model.addAttribute("type", "html");
         return "pdf-template";
     }
 

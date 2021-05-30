@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.Period;
 
 @Service
 public class PdfService {
@@ -51,6 +53,9 @@ public class PdfService {
         byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
         String image = new String(encodeBase64, StandardCharsets.UTF_8);
         context.setVariable("image", image);
+        int age = Period.between(cv.getInformation().getBirthDate(), LocalDate.now()).getYears();
+        context.setVariable("age", age);
+        context.setVariable("type", "pdf");
         return context;
     }
 

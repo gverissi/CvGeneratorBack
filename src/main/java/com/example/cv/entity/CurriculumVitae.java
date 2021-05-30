@@ -25,13 +25,16 @@ public class CurriculumVitae {
     @JoinColumn(name = "person_id", referencedColumnName = "id")
     private Person person;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "information_id", referencedColumnName = "id")
+    private Information information;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id")
     private List<Experience> experiences = new ArrayList<>();
 
     @JsonManagedReference
     @JsonIgnore
-//    @JsonBackReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "cv_skill", joinColumns = { @JoinColumn(name = "cv_id") }, inverseJoinColumns = { @JoinColumn(name = "skill_id") })
     private List<Skill> skills = new ArrayList<>();
@@ -78,6 +81,14 @@ public class CurriculumVitae {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    public Information getInformation() {
+        return information;
+    }
+
+    public void setInformation(Information information) {
+        this.information = information;
     }
 
     public List<Experience> getExperiences() {
