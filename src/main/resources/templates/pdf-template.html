@@ -29,7 +29,7 @@
             <div class="mb-3" th:each="skill : ${cv.skills}">
                 <p class="text-right" th:text="${skill.name}"></p>
             </div>
-            <h3 class="text-right mt-20px">INFORMATIONS</h3>
+            <h3 class="text-right mt-30px">INFORMATIONS</h3>
             <p class="text-right"><span th:text="${age}"></span> ans</p>
             <p class="text-right">Mobilité : <span th:text="${cv.information.mobility}"></span></p>
             <p class="text-right" th:text="${cv.information.phone}"></p>
@@ -37,24 +37,34 @@
             <p class="text-right"><a th:href="${cv.information.linkedIn}" th:text="${cv.information.linkedIn}"></a></p>
             <p class="text-right"><a th:href="${cv.information.gitHub}" th:text="${cv.information.gitHub}"></a></p>
         </div><div class="inline right-border mt-5px">
+
             <h3>PROFILE</h3>
             <p th:text="${cv.person.profile}"></p>
 
-            <h3 th:if="${cv.experiences.size() > 1}" class="mt-20px">EXPÉRIENCES</h3>
-            <h3 th:if="${cv.experiences.size() == 1}" class="mt-20px">EXPÉRIENCE</h3>
+            <h3 th:if="${cv.experiences.size() > 1}" class="mt-30px">EXPÉRIENCES</h3>
+            <h3 th:if="${cv.experiences.size() == 1}" class="mt-30px">EXPÉRIENCE</h3>
             <div class="mt-10px" th:each="experience : ${cv.experiences}">
                 <strong th:text="${experience.society}"></strong><strong> - </strong><strong th:text="${experience.location}"></strong><strong> | </strong><strong th:text="${experience.year}"></strong>
                 <p><span th:text="${experience.title}"></span> | <span th:text="${experience.duration}"></span><span> mois</span></p>
                 <p class="new-line" th:text="${experience.description}"></p>
             </div>
 
-            <h3 th:if="${cv.projects.size() > 1}" class="mt-20px">PROJETS</h3>
-            <h3 th:if="${cv.projects.size() == 1}" class="mt-20px">PROJET</h3>
+            <h3 th:if="${cv.projects.size() > 1}" class="mt-30px">PROJETS</h3>
+            <h3 th:if="${cv.projects.size() == 1}" class="mt-30px">PROJET</h3>
             <div class="mt-10px" th:each="project : ${cv.projects}">
                 <strong th:text="${project.title}"></strong><strong> | </strong><strong th:text="${project.year}"></strong>
                 <p class="new-line" th:text="${project.description}"></p>
                 <p><a class="text-right" th:href="${project.site}" th:text="${project.site}"></a></p>
                 <p><a class="text-right" th:href="${project.gitHub}" th:text="${project.gitHub}"></a></p>
+            </div>
+
+            <h3 th:if="${cv.formations.size() > 1}" class="mt-30px">FORMATIONS</h3>
+            <h3 th:if="${cv.formations.size() == 1}" class="mt-30px">FORMATION</h3>
+            <div class="mt-10px" th:each="formation : ${cv.formations}">
+                <strong th:text="${formation.title}"></strong><strong> | </strong><strong th:text="${formation.year}"></strong>
+                <p><span th:text="${formation.school}"></span> - <span th:text="${formation.location}"></span></p>
+                <p><span th:text="${formation.duration}"></span><span> mois</span></p>
+                <p class="new-line" th:text="${formation.result}"></p>
             </div>
 
         </div>

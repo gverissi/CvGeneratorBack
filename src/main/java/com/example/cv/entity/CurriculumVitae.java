@@ -36,6 +36,10 @@ public class CurriculumVitae {
     @JoinColumn(name = "cv_id")
     private List<Project> projects = new ArrayList<>();
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cv_id")
+    private List<Formation> formations = new ArrayList<>();
+
     @JsonManagedReference
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
@@ -51,6 +55,10 @@ public class CurriculumVitae {
 
     public void addProject(Project project) {
         projects.add(project);
+    }
+
+    public void addFormation(Formation formation) {
+        formations.add(formation);
     }
 
     public void addSkill(Skill skill) {
@@ -112,6 +120,14 @@ public class CurriculumVitae {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public List<Formation> getFormations() {
+        return formations;
+    }
+
+    public void setFormations(List<Formation> formations) {
+        this.formations = formations;
     }
 
     public List<Skill> getSkills() {

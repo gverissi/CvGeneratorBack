@@ -71,6 +71,24 @@ public class CvGeneratorApplication {
             project.setSite("https://this-is-not-poker-greg.netlify.app/");
             cv.addProject(project);
 
+            Formation formation = new Formation();
+            formation.setTitle("POEC Développeur JAVA");
+            formation.setYear(2021);
+            formation.setSchool("ENI école informatique");
+            formation.setDuration(3);
+            formation.setLocation("Quimper");
+            formation.setResult("En cours");
+            cv.addFormation(formation);
+
+            formation = new Formation();
+            formation.setTitle("Concepteur Développeur d'Applications");
+            formation.setYear(2020);
+            formation.setSchool("GRETA");
+            formation.setDuration(11);
+            formation.setLocation("Vannes");
+            formation.setResult("Obtention avec les félicitations du jury");
+            cv.addFormation(formation);
+
             skillRepository.findAllByTypeOrderByName(SkillType.LANGUAGE.label).forEach(cv::addSkill);
             skillRepository.findAllByTypeOrderByName(SkillType.FRAMEWORK.label).forEach(cv::addSkill);
             skillRepository.findAllByTypeOrderByName(SkillType.DATABASE.label).forEach(cv::addSkill);

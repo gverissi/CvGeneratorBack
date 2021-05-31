@@ -22,12 +22,12 @@ public class ProjectController {
     }
 
     @GetMapping("/projects")
-    public List<Project> getAllExperiences(@PathVariable long cvId) {
+    public List<Project> getAllProjects(@PathVariable long cvId) {
         return cvService.findById(cvId).getProjects();
     }
 
     @PostMapping("/projects")
-    public Project addExperience(@PathVariable long cvId, @RequestBody Project project) {
+    public Project addProject(@PathVariable long cvId, @RequestBody Project project) {
         CurriculumVitae cv = cvService.findById(cvId);
         cv.addProject(project);
         cvService.save(cv);
@@ -35,14 +35,14 @@ public class ProjectController {
     }
 
     @PutMapping("/projects/{projId}")
-    public void updateExperience(@PathVariable long cvId, @PathVariable long projId, @RequestBody Project project) {
+    public void updateProject(@PathVariable long cvId, @PathVariable long projId, @RequestBody Project project) {
         CurriculumVitae cv = cvService.findById(cvId);
         Project localProj = cv.getProjects().stream().filter(proj -> proj.getId() == projId).findFirst().orElse(null);
         if (Collections.replaceAll(cv.getProjects(), localProj, project)) cvService.save(cv);
     }
 
     @DeleteMapping("/projects/{projId}")
-    public void removeExperience(@PathVariable long cvId, @PathVariable long projId) {
+    public void removeProject(@PathVariable long cvId, @PathVariable long projId) {
         CurriculumVitae cv = cvService.findById(cvId);
         Project project = cv.getProjects().stream().filter(proj -> proj.getId() == projId).findFirst().orElse(null);
         cv.getProjects().remove(project);
