@@ -1,6 +1,7 @@
 package com.example.cv.service;
 
 import com.example.cv.entity.CurriculumVitae;
+import com.example.cv.entity.Image;
 import com.lowagie.text.DocumentException;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,12 @@ public class PdfService {
     private Context getContext(CurriculumVitae cv) {
         Context context = new Context();
         context.setVariable("cv", cv);
-        byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
-        String image = new String(encodeBase64, StandardCharsets.UTF_8);
-        context.setVariable("image", image);
+        Image image = cv.getImage();
+        if (image != null) {
+            byte[] encodeBase64 = Base64.encodeBase64(image.getContent());
+            String imageStr = new String(encodeBase64, StandardCharsets.UTF_8);
+            context.setVariable("image", imageStr);
+        }
         int age = Period.between(cv.getInformation().getBirthDate(), LocalDate.now()).getYears();
         context.setVariable("age", age);
         context.setVariable("type", "pdf");

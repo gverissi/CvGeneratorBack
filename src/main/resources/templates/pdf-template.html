@@ -3,7 +3,6 @@
 
 <head>
     <title>Curriculum Vitae</title>
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>-->
     <link th:if="${type == 'html'}" rel="stylesheet" href="/css/styles.css"/>
     <link th:if="${type == 'pdf'}" rel="stylesheet" href="css/styles.css"/>
 </head>
@@ -12,15 +11,10 @@
 
 <body>
 
-<div>
-    <div class="div1">column 1</div><div class="div2">column 2</div>
-</div>
-
-
-<div>
+<div class="container">
 
     <div class="border-bottom">
-        <div class="inline-middle-fs-0 left ">
+        <div class="inline-middle-fs-0 left">
             <img class="image-style" th:src="|data:image/png;base64,${image}|" alt="image"/>
         </div><div class="inline-middle right">
             <h1 th:text="${cv.person.firstName.toUpperCase()}"></h1>
@@ -40,8 +34,8 @@
             <p class="text-right">Mobilité : <span th:text="${cv.information.mobility}"></span></p>
             <p class="text-right" th:text="${cv.information.phone}"></p>
             <p class="text-right" th:text="${cv.information.email}"></p>
-            <p class="text-right"><a class="text-right" th:href="${cv.information.linkedIn}" th:text="${cv.information.linkedIn}"></a></p>
-            <p class="text-right"><a class="text-right" th:href="${cv.information.gitHub}" th:text="${cv.information.gitHub}"></a></p>
+            <p class="text-right"><a th:href="${cv.information.linkedIn}" th:text="${cv.information.linkedIn}"></a></p>
+            <p class="text-right"><a th:href="${cv.information.gitHub}" th:text="${cv.information.gitHub}"></a></p>
         </div><div class="inline right-border mt-5px">
             <h3>PROFILE</h3>
             <p th:text="${cv.person.profile}"></p>

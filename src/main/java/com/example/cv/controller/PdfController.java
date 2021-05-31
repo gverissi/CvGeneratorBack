@@ -1,6 +1,7 @@
 package com.example.cv.controller;
 
 import com.example.cv.entity.CurriculumVitae;
+import com.example.cv.entity.Image;
 import com.example.cv.service.CvService;
 import com.example.cv.service.PdfService;
 import com.lowagie.text.DocumentException;
@@ -56,9 +57,12 @@ public class PdfController {
     public String showCvAsHtml(@PathVariable long cvId, Model model) {
         CurriculumVitae cv = cvService.findById(cvId);
         model.addAttribute("cv", cv);
-        byte[] encodeBase64 = Base64.encodeBase64(cv.getImage().getContent());
-        String image = new String(encodeBase64, StandardCharsets.UTF_8);
-        model.addAttribute("image", image);
+        Image image = cv.getImage();
+        if (image != null) {
+            byte[] encodeBase64 = Base64.encodeBase64(image.getContent());
+            String imageStr = new String(encodeBase64, StandardCharsets.UTF_8);
+            model.addAttribute("image", imageStr);
+        }
         int age = Period.between(cv.getInformation().getBirthDate(), LocalDate.now()).getYears();
         model.addAttribute("age", age);
         model.addAttribute("type", "html");
